@@ -143,6 +143,8 @@
     <ClInclude Include="Route\RouteParameters.h" />
     <ClInclude Include="Route\RouteResult.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="Storage.h" />
+    <ClInclude Include="StorageConfig.h" />
     <ClInclude Include="Table\TableParameters.h" />
     <ClInclude Include="Table\TableResult.h" />
     <ClInclude Include="Tile\TileParameters.h" />
@@ -201,6 +203,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="StorageConfig.cpp" />
     <ClCompile Include="Table\TableParameters.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\stdafx.h</PrecompiledHeaderFile>

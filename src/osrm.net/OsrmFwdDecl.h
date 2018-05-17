@@ -21,6 +21,7 @@ namespace osrm
 	}
 	namespace storage
 	{
+		class Storage;
 		struct StorageConfig;
 	}
 

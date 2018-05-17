@@ -28,21 +28,28 @@ RouteResult^ RouteResult::FromJsonObject(const osrm::util::json::Object& jsonObj
 	auto code = jsonObject.values.at("code").get<String>().value;
 	result->Code = Osrmnet::Utils::ConvertFromUtf8(code);
 	
-
-	// Process Routes
-	const auto &routes = jsonObject.values.at("routes").get<Array>().values;
-	for (const auto &route : routes)
+	if (result->Code == "Ok")
 	{
-		const auto &routeObject = route.get<osrm::util::json::Object>();
-		result->Routes->Add(Route::FromJsonObject(routeObject, routeParameters->Steps, routeParameters->Annotations, routeParameters->Geometries, routeParameters->Overview));
+		// Process Routes
+		const auto &routes = jsonObject.values.at("routes").get<Array>().values;
+		for (const auto &route : routes)
+		{
+			const auto &routeObject = route.get<osrm::util::json::Object>();
+			result->Routes->Add(Route::FromJsonObject(routeObject, routeParameters->Steps, routeParameters->Annotations, routeParameters->Geometries, routeParameters->Overview));
+		}
+
+		// Process waypoint
+		const auto &waypoints = jsonObject.values.at("waypoints").get<Array>().values;
+		for (const auto &waypoint : waypoints)
+		{
+			const auto &waypointObject = waypoint.get<osrm::util::json::Object>();
+			result->Waypoints->Add(Waypoint::FromJsonObject(waypointObject));
+		}
 	}
-
-	// Process waypoint
-	const auto &waypoints = jsonObject.values.at("waypoints").get<Array>().values;
-	for (const auto &waypoint : waypoints)
+	else
 	{
-		const auto &waypointObject = waypoint.get<osrm::util::json::Object>();
-		result->Waypoints->Add(Waypoint::FromJsonObject(waypointObject));
+		auto message = jsonObject.values.at("message").get<String>().value;
+		result->Message = Osrmnet::Utils::ConvertFromUtf8(message);
 	}
 
 	return result;

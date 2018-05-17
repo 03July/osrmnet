@@ -84,10 +84,7 @@ Status Osrm::Route(RouteService::RouteParameters^ routeParameters, [System::Runt
 		if (routeParameters->IsValid())
 		{
 			retVal = osrmEngine->Route(*routeParameters->InnerRouteParameters(), jsonResult);
-			if (retVal == osrm::Status::Ok)
-			{
-				result = RouteService::RouteResult::FromJsonObject(jsonResult, routeParameters);
-			}
+			result = RouteService::RouteResult::FromJsonObject(jsonResult, routeParameters);
 		}		
 	}
 	catch(osrm::util::exception exception)

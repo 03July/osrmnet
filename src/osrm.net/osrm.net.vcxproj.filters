@@ -55,6 +55,8 @@
     <ClCompile Include="Tile\TileParameters.cpp">
       <Filter>Tile</Filter>
     </ClCompile>
+    <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="StorageConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordinate.h" />
@@ -115,6 +117,8 @@
     <ClInclude Include="Tile\TileParameters.h">
       <Filter>Tile</Filter>
     </ClInclude>
+    <ClInclude Include="Storage.h" />
+    <ClInclude Include="StorageConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
