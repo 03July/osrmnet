@@ -5,7 +5,7 @@
 -
   shallow_clone: true
   clone_depth: 1
-  version: 0.1.0.{build}
+  version: 1.0.0.{build}
   pull_requests:
     do_not_increment_build_number: true
   branches:
@@ -13,7 +13,7 @@
       - master
   configuration: Release
   platform: x64
-  image: Visual Studio 2015
+  image: Visual Studio 2017
   # Uncomment to debug the AV build worker
   # init:
   # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -22,20 +22,19 @@
   - .\src\osrm.net\libosrm -> .\libosrmver.txt
   - .\src\Test\osrm.net.test\TestData -> .\libosrmver.txt
   before_build:
-  - appveyor-retry nuget restore .\src\osrm.net.sln
-  - ps: .\build.ps1
+  - appveyor-retry nuget restore .\src\osrm.net.sln  
 
   build_script:
-  - msbuild .\src\osrm.net.sln /t:Rebuild /p:Configuration=Release;Platform="x64" /m
-  - nuget.exe pack .\src\osrm.net\osrm.net.nuspec -NonInteractive  -Version %APPVEYOR_BUILD_VERSION%-pre
+  - ps: .\build.ps1
+  - nuget.exe pack .\src\osrm.net\osrm.net.nuspec -NonInteractive  -Version %APPVEYOR_BUILD_VERSION%
   artifacts:
   - path: '*.nupkg'
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "0.1.0.{build}"
-    assembly_file_version: "0.1.0.{build}"
-    assembly_informational_version: "0.1.0.{build}-pre"
+    assembly_version: "1.0.0.{build}"
+    assembly_file_version: "1.0.0.{build}"
+    assembly_informational_version: "1.0.0.{build}"
   test:
     assemblies: '**\*.Test.dll'
   deploy:
